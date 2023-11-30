@@ -4,6 +4,9 @@ from sentence_transformers import SentenceTransformer
 import numpy as np
 import umap
 
+from sklearn.manifold import TSNE
+
+
 
 from sklearn.cluster import KMeans
 
@@ -22,8 +25,9 @@ def dim_red(mat, p, method):
     if method=='ACP':
         red_mat = mat[:,:p]
         
-    elif method=='AFC':
-        red_mat = mat[:,:p]
+    elif method=='TSNE':
+        tsne = TSNE(n_components = p, random_state=42)
+        red_mat = tsne.fit_transform(mat)
         
     elif method=='UMAP':
         umap_model = umap.UMAP(n_components=p, n_neighbors=35,
