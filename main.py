@@ -1,16 +1,18 @@
-from sklearn.datasets import fetch_20newsgroups
-from sklearn.metrics.cluster import normalized_mutual_info_score, adjusted_rand_score
-from sentence_transformers import SentenceTransformer
 import numpy as np
 import umap
+import pickle
+# Parser to use method as an argument
+import argparse
+import hdbscan
 
+from sklearn.datasets import fetch_20newsgroups
 from sklearn.manifold import TSNE
-
-
-
 from sklearn.cluster import KMeans
-
 from sklearn.decomposition import PCA
+from sklearn.metrics.cluster import normalized_mutual_info_score, adjusted_rand_score
+
+from sentence_transformers import SentenceTransformer
+
 
 
 
@@ -47,7 +49,7 @@ def dim_red(mat, p, method):
     return red_mat
 
 
-def clust(mat, k):
+def clust(mat, k, model):
     '''
     Perform clustering
 
@@ -59,14 +61,32 @@ def clust(mat, k):
     ------
         pred : list of predicted labels
     '''
-    
-    kmeans = KMeans(n_clusters=k, init='k-means++', random_state=42)
-    pred = kmeans.fit_predict(mat)
+    if model=='KMeans':
+        kmeans = KMeans(n_clusters=k, init='k-means++', random_state=42)
+        pred = kmeans.fit_predict(mat)
+    elif model=='HDBSCAN':
+        clusterer = hdbscan.HDBSCAN(min_samples=3, min_cluster_size = 15,
+                               metric='euclidean', 
+                               cluster_selection_method='eom')
+        pred = clusterer.fit_predict(mat)
+    else:
+        raise Exception("Please select one of the two models: KMeans, HDBSCAN")
     
     return pred
 
-# import data
-ng20 = fetch_20newsgroups(subset='test')
+def load_data():
+    try:
+        # Load the dataset from the local cache
+        with open("./dataset/dataset.pkl", "rb") as file:
+            return pickle.load(file)
+    except Exception as err:
+        print("error loading data from local file", err)
+        # In case of error, download remote data
+        return fetch_20newsgroups(subset="test")
+    
+
+# load data
+ng20 = load_data()
 corpus = ng20.data[:2000]
 labels = ng20.target[:2000]
 k = len(set(labels))
@@ -75,19 +95,33 @@ k = len(set(labels))
 model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 embeddings = model.encode(corpus)
 
-# Perform dimensionality reduction and clustering for each method
-methods = ['ACP', 'TSNE', 'UMAP']
-for method in methods:
-    # Perform dimensionality reduction
+def main():
+    METHODS = ["ACP", "TSNE", "UMAP"]
+    MODELS = ["KMeans", "HDBSCAN"]
+    parser = argparse.ArgumentParser(description="Examen parser")
+    parser.add_argument(
+        "--method", help="Specify the method.", choices=METHODS, required=True
+    )
+    parser.add_argument(
+        "--model", help="Specify the model.", choices=MODELS, required=True
+    )
+    args = parser.parse_args()
+    # Get the method and model from args
+    method = args.method
+    model = args.model
+
+    # Computing
     red_emb = dim_red(embeddings, 20, method)
 
     # Perform clustering
-    pred = clust(red_emb, k)
+    pred = clust(red_emb, k, model)
 
     # Evaluate clustering results
     nmi_score = normalized_mutual_info_score(pred, labels)
     ari_score = adjusted_rand_score(pred, labels)
 
     # Print results
-    print(f'Method: {method}\nNMI: {nmi_score:.2f} \nARI: {ari_score:.2f}\n')
+    print(f"Method: {method}\nNMI: {nmi_score:.2f} \nARI: {ari_score:.2f}\n")
 
+# Call the main
+main()
