@@ -56,7 +56,7 @@ Une partie intégrante de notre développement a impliqué la mise en œuvre de 
 **python main.py --method UMAP --model KMeans**
 
 ## Build the Docker image
-**docker build -t exam_image**
+**docker build -t exam_image .**
 
 **docker run --rm -it exam_image:latest --method ACP --model KMeans**
 
@@ -68,7 +68,6 @@ Dans le cadre de notre projet, nous avons décidé de développer les bonus.
 * **Choix des Modèles par l'Utilisateur :** Nous avons amélioré l'interface utilisateur de notre application pour permettre aux utilisateurs de choisir les modèles de réduction de dimensionnalité et de clustering qu'ils souhaitent tester. Voici les commandes gitbash et docker pour cela :
  **docker run --rm -it exam_image:latest --method ACP --model KMeans**
 ![image](https://github.com/vvead/examen/assets/126177176/2b1cf773-33ec-4963-a4d8-750299d6184b)       
-  **ACP --model KMeans**
 
 ## *Visualisation des Données*
 * **Visualisation sur un Plan :** Nous avons intégré des visualisations qui projettent les données sur un plan à l'aide des techniques ACP, AFC et UMAP. Cela permet aux utilisateurs de visualiser la distribution des clusters et de mieux comprendre la structure des données.
