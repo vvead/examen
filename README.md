@@ -56,6 +56,7 @@ Une partie intégrante de notre développement a impliqué la mise en œuvre de 
 **python main.py --method UMAP --model KMeans**
 
 ## Build the Docker image
+**docker build -t exam_image**
 **docker run --rm -it exam_image:latest --method ACP --model KMeans**
 
 # **Autres bonus**
