@@ -4,6 +4,10 @@ from sentence_transformers import SentenceTransformer
 import numpy as np
 
 
+from sklearn.decomposition import PCA
+
+
+
 def dim_red(mat, p, method):
     '''
     Perform dimensionality reduction
@@ -17,7 +21,8 @@ def dim_red(mat, p, method):
         red_mat : NxP list such that p<<m
     '''
     if method=='ACP':
-        red_mat = mat[:,:p]
+        pca = PCA(n_components=p)
+        red_mat = pca.fit_transform(mat)
         
     elif method=='AFC':
         red_mat = mat[:,:p]
