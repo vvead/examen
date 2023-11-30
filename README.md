@@ -67,3 +67,11 @@ Dans le cadre de notre projet, nous avons décidé de développer les bonus.
 
 
 ## *Visualisation des Données*
+* **Visualisation sur un Plan :** Nous avons intégré des visualisations qui projettent les données sur un plan à l'aide des techniques ACP, AFC et UMAP. Cela permet aux utilisateurs de visualiser la distribution des clusters et de mieux comprendre la structure des données.
+
+# **TEAM**
+
+*   ***Zelmat Belkacem       MLSD***
+*   ***Cherif Asmaa Chaimaa  MLSD***
+*   ***Touhami Wided Ahlem   MLSD***
+
