@@ -46,3 +46,13 @@ Une partie intégrante de notre développement a impliqué la mise en œuvre de 
 
 * **BONUS: Intégration des Données avec Docker :** La sérialisation et le stockage des données dans Docker ont été essentiels pour assurer la portabilité et la reproductibilité du projet. Cela a facilité la mise en place d'un environnement de développement cohérent pour tous les membres de l'équipe et a permis de gagner un temps précieux lors des itérations de développement.
 
+# **Guides**
+## Install dependencies
+**pip install -r requirements.txt**
+
+##  Run the project
+**python main.py --method UMAP --model KMeans**
+
+## Build the Docker image
+**docker run --rm -it exam_image:latest --method ACP --model KMeans**
+
