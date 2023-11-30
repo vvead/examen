@@ -3,6 +3,9 @@ from sklearn.metrics.cluster import normalized_mutual_info_score, adjusted_rand_
 from sentence_transformers import SentenceTransformer
 import numpy as np
 
+from sklearn.manifold import TSNE
+
+
 
 def dim_red(mat, p, method):
     '''
@@ -19,8 +22,9 @@ def dim_red(mat, p, method):
     if method=='ACP':
         red_mat = mat[:,:p]
         
-    elif method=='AFC':
-        red_mat = mat[:,:p]
+    elif method=='TSNE':
+        tsne = TSNE(n_components = p, random_state=42)
+        red_mat = tsne.fit_transform(mat)
         
     elif method=='UMAP':
         red_mat = mat[:,:p]
