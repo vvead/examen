@@ -77,7 +77,7 @@ def clust(mat, k, model):
 def load_data():
     try:
         # Load the dataset from the local cache
-        with open("/app/dataset/dataset.pkl", "rb") as file:
+        with open("./dataset/dataset.pkl", "rb") as file:
             return pickle.load(file)
     except Exception as err:
         print("error loading data from local file", err)
@@ -96,7 +96,7 @@ model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 embeddings = model.encode(corpus)
 
 def main():
-    METHODS = ["ACP", "AFC", "UMAP"]
+    METHODS = ["ACP", "TSNE", "UMAP"]
     MODELS = ["KMeans", "HDBSCAN"]
     parser = argparse.ArgumentParser(description="Examen parser")
     parser.add_argument(
