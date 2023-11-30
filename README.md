@@ -1,4 +1,4 @@
-# examen : Projet Final
+![image](https://github.com/vvead/examen/assets/126177176/2b1cf773-33ec-4963-a4d8-750299d6184b)# examen : Projet Final
 # **Introduction**
 Ce projet représente une collaboration intensive entre les 3 membres de notre team, axée sur l'application de techniques avancées de clustering et de réduction de dimensionnalité à un ensemble de données textuelles. L'objectif principal était d'évaluer et de comparer la performance de diverses méthodes de réduction de dimensionnalité, telles que l'ACP, TSNE, et UMAP, couplées au clustering avec HDBSCAN. Un aspect clé de ce projet a été l'utilisation efficace des outils de développement collaboratif modernes. En particulier, Git et GitHub ont été employés pour la gestion du code et la collaboration entre les membres de l'équipe, tandis que Docker a été utilisé pour garantir un environnement de développement cohérent et reproductible. Cette approche a permis une intégration fluide du travail, malgré la complexité des tâches et la diversité des techniques utilisées. Les résultats, évalués par les scores NMI et ARI, ont non seulement fourni des insights précieux sur les techniques de clustering dans le traitement de données textuelles, mais ont également démontré l'efficacité de notre méthodologie de travail collaboratif dans le contexte d'un projet de science des données complexe.
 
@@ -57,15 +57,19 @@ Une partie intégrante de notre développement a impliqué la mise en œuvre de 
 
 ## Build the Docker image
 **docker build -t exam_image**
+
 **docker run --rm -it exam_image:latest --method ACP --model KMeans**
+
 
 # **Autres bonus**
 Dans le cadre de notre projet, nous avons décidé de développer les bonus.
 
 ## Interactivité et Sélection de Modèles
-* **Choix des Modèles par l'Utilisateur :** Nous avons amélioré l'interface utilisateur de notre application pour permettre aux utilisateurs de choisir les modèles de réduction de dimensionnalité et de clustering qu'ils souhaitent tester. Voici les commandes gitbash et docker pour cela : **docker run --rm -it exam_image:latest --method** 
-        **ACP --model KMeans**
-
+* **Choix des Modèles par l'Utilisateur :** Nous avons amélioré l'interface utilisateur de notre application pour permettre aux utilisateurs de choisir les modèles de réduction de dimensionnalité et de clustering qu'ils souhaitent tester. Voici les commandes gitbash et docker pour cela :
+ **docker run --rm -it exam_image:latest --method ACP --model KMeans**
+![images](images/image.png)
+       
+  **ACP --model KMeans**
 
 ## *Visualisation des Données*
 * **Visualisation sur un Plan :** Nous avons intégré des visualisations qui projettent les données sur un plan à l'aide des techniques ACP, AFC et UMAP. Cela permet aux utilisateurs de visualiser la distribution des clusters et de mieux comprendre la structure des données.
