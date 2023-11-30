@@ -3,3 +3,4 @@ sentence-transformers
 umap
 numpy 
 hdbscan
+gcc
